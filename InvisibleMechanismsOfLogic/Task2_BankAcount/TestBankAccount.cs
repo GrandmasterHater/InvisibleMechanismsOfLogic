@@ -2,7 +2,7 @@
 
 public class TestBankAccount
 {
-    public static void Main(string[] args)
+    public static void RunMain(string[] args)
     {
         BankAccount account = new BankAccount(1000);
         account.Deposit(500);

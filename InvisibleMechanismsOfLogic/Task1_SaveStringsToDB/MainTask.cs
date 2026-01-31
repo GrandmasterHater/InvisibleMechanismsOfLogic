@@ -2,7 +2,7 @@
 
 public class MainTask
 {
-    public static void Main(string[] args)
+    public static void RunMain(string[] args)
     {
         var connectionString = "Server=localhost;Database=testdb;UserId=admin;Password=1234;";
         
