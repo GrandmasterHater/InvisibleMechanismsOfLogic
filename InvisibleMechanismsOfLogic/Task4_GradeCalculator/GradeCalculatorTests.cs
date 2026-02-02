@@ -7,7 +7,7 @@ public class GradeCalculatorTests
 {
     [TestCaseSource(nameof(NotSuccessAverageCases))]
     [TestCaseSource(nameof(SuccessAverageCases))]
-    public GradeCalculator.AverageResult CalculateAverage_WhenReturnsNotSuccessStatuses(List<int> grades)
+    public GradeCalculator.AverageResult CalculateAverageTests(List<int> grades)
     {
         GradeCalculator gradeCalculator = CreateGradeCalculator();
 
