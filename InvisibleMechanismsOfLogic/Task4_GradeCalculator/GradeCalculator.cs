@@ -1,10 +1,5 @@
 ﻿namespace InvisibleMechanismsOfLogic.Task4_GradeCalculator;
 
-/*
-Имеется класс GradeCalculator с методом calculateAverage(List grades), который вычисляет среднее значение оценок студентов.
-Реализуйте этот класс с учётом того, что существуют граничные случаи, которые необходимо правильно обработать, чтобы избежать логических ошибок.
-Сделайте пять концептуально различающихся тестов для метода calculateAverage.
-*/
 public class GradeCalculator
 {
     public AverageResult CalculateAverage(List<int> grades)
