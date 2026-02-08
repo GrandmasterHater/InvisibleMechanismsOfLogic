@@ -4,7 +4,7 @@ public class ComplexMultiThreadProcessing
 {
     private const int SIZE = 1000000;
     private const int THREADS = 4;
-    private static int _sum = 0;
+    private static long _sum = 0;
 
     public static void Run() 
     {
@@ -18,7 +18,9 @@ public class ComplexMultiThreadProcessing
             {
                 Thread thread = new Thread(() =>
                 {
-                    int thisThreadSum = chunk.Sum();
+                    long thisThreadSum = chunk
+                        .Select(Convert.ToInt64)
+                        .Sum();
                     Interlocked.Add(ref _sum, thisThreadSum);
                 });
                 
@@ -27,14 +29,7 @@ public class ComplexMultiThreadProcessing
 
         foreach (Thread thread in threads)
         {
-            try
-            {
-                thread.Start();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            thread.Start();
         }
         
         foreach (Thread thread in threads)
