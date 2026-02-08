@@ -4,20 +4,16 @@ public class ComplexMultiThreadProcessing
 {
     private const int SIZE = 1000000;
     private const int THREADS = 4;
-    private static int[] _data = new int[SIZE];
-    private static volatile int _sum = 0;
+    private static int _sum = 0;
 
     public static void Run() 
     {
         Random random = new Random();
-        
-        for (int i = 0; i < SIZE; i++) 
-        {
-            _data[i] = random.Next(100);
-        }
         int chunkSize = SIZE / THREADS;
         
-        IEnumerable<Thread> threads = _data.Chunk(chunkSize)
+        IEnumerable<Thread> threads = Enumerable.Range(0, SIZE)
+            .Select(_ => random.Next())
+            .Chunk(chunkSize)
             .Select(chunk =>
             {
                 Thread thread = new Thread(() =>
@@ -25,10 +21,21 @@ public class ComplexMultiThreadProcessing
                     int thisThreadSum = chunk.Sum();
                     Interlocked.Add(ref _sum, thisThreadSum);
                 });
-
-                thread.Start();
+                
                 return thread;
             });
+
+        foreach (Thread thread in threads)
+        {
+            try
+            {
+                thread.Start();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
         
         foreach (Thread thread in threads)
         {
